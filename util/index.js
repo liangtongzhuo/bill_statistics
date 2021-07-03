@@ -1,7 +1,7 @@
 const csv = require('csv-parser')
 const fs = require('fs')
-const dbPath = "./db.txt"
-const db = JSON.parse(fs.readFileSync(dbPath, "utf8"));
+const { dbAddOrder } = require('./db')
+
 
 /**
  * csv 解析封装
@@ -22,32 +22,42 @@ module.exports.readcsv = (path) => {
 }
 
 /**
- * 
- * @param {* 支付宝还是微信} wechat_or_zfb 
- * @param {* 唯一id} uuid 
- * @param {* 时间} time 
- * @param {* 支付对象} target 
- * @param {* 商品} commodity 
- * @param {* 价格} price 
- * @param {* 备注} notes 
- * @param {* 存储原始数据} json 
+ * 微信账单保存
+ * @param {微信账单} wechatBillList 
  */
-module.exports.addOrderDB = async (wechat_or_zfb, uuid, time, target, commodity, price, notes, json) => {
-  if (db[uuid]) {
-    console.log('已经存在了', db[uuid].commodity, db[uuid].price)
-  }
-  db[uuid] = {
-    wechat_or_zfb, uuid, time, target, commodity, price, notes, json
+module.exports.wechatBillSave = (wechatBillList) => {
+  for (const order of wechatBillList) {
+    const { 交易单号, 交易时间, 交易对方, 商品, 备注 } = order
+    let 金额 = order['金额(元)']
+    金额 = 金额.slice(1)
+    // 目前只记录支出
+    if (order['收/支'] == '支出') {
+      // 添加
+      dbAddOrder('wechat', 交易单号, 交易时间, 交易对方, 商品, 金额, 备注, order)
+    }
   }
 }
 
 /**
- * 保存数据到本地
+ * 支付宝账单保存
+ * @param {微信账单} zfbBillList 
  */
-module.exports.dbSave = () => {
-  fs.writeFileSync(dbPath, JSON.stringify(db));
+module.exports.zfbtBillSave = (zfbBillList) => {
+  for (const order of zfbBillList) {
+    // 去除 key和 value 结尾带空格
+    for (const key in order) {
+      order[key] = order[key].trimEnd()
+      order[key.trimEnd()] = order[key];
+      if (key.trimEnd().length != key.length) {
+        delete order[key]
+      }
+    }
+    const { 交易号, 付款时间, 交易对方, 商品名称, 备注 } = order
+    const 金额 = order['金额（元）']
+    // 目前只记录支出
+    if (order['收/支'] == '支出') {
+      // 添加数据
+      dbAddOrder('zfb', 交易号, 付款时间, 交易对方, 商品名称, 金额, 备注, order)
+    }
+  }
 }
-
-
-
-

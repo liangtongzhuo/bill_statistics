@@ -1,0 +1,14 @@
+{
+  "name": "data_consume",
+  "version": "1.0.0",
+  "description": "每个月根据微信和支付宝记录统计账单",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "csv-parser": "^3.0.0"
+  }
+}

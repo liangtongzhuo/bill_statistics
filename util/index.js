@@ -33,7 +33,7 @@ module.exports.wechatBillSave = (wechatBillList) => {
     // 目前只记录支出
     if (order['收/支'] == '支出') {
       // 添加
-      dbAddOrder('wechat', 交易单号, 交易时间, 交易对方, 商品, 金额, 备注, order)
+      dbAddOrder('微信', 交易单号, 交易时间, 交易对方, 商品, 金额, 备注)
     }
   }
 }
@@ -57,7 +57,7 @@ module.exports.zfbtBillSave = (zfbBillList) => {
     // 目前只记录支出
     if (order['收/支'] == '支出') {
       // 添加数据
-      dbAddOrder('zfb', 交易号, 付款时间, 交易对方, 商品名称, 金额, 备注, order)
+      dbAddOrder('支付宝', 交易号, 付款时间, 交易对方, 商品名称, 金额, 备注)
     }
   }
 }

@@ -1,24 +1,27 @@
 const fs = require('fs')
 const dbPath = "./db.txt"
-const db = JSON.parse(fs.readFileSync(dbPath, "utf8"));
+let db = {}
+
+try {
+  db = JSON.parse(fs.readFileSync(dbPath, "utf8"));
+} catch (error) { }
 
 /**
  * 
- * @param {* 支付宝还是微信} wechat_or_zfb 
- * @param {* 唯一id} uuid 
- * @param {* 时间} time 
- * @param {* 支付对象} target 
- * @param {* 商品} commodity 
- * @param {* 价格} price 
- * @param {* 备注} notes 
- * @param {* 存储原始数据} json 
+ * @param {* 支付宝还是微信} 支付宝或微信 
+ * @param {* 唯一id} 交易单号 
+ * @param {* 时间} 时间 
+ * @param {* 支付对象} 支付对象 
+ * @param {* 商品} 商品 
+ * @param {* 价格} 价格 
+ * @param {* 备注} 备注 
  */
-module.exports.dbAddOrder = (wechat_or_zfb, uuid, time, target, commodity, price, notes, json) => {
-  if (db[uuid]) {
-    console.log('已经存在了', db[uuid].commodity, db[uuid].price)
+module.exports.dbAddOrder = (支付宝或微信, 交易单号, 时间, 支付对象, 商品, 价格, 备注) => {
+  if (db[交易单号]) {
+    console.log('已经存在了', db[交易单号].商品, db[交易单号].价格)
   }
-  db[uuid] = {
-    wechat_or_zfb, uuid, time, target, commodity, price, notes, json
+  db[交易单号] = {
+    支付宝或微信, 交易单号, 时间, 支付对象, 商品, 价格, 备注
   }
 }
 
@@ -30,5 +33,10 @@ module.exports.dbSave = () => {
 }
 
 
-
+/**
+ * 获取数据
+ */
+module.exports.dbGet = () => {
+  return db;
+}
 

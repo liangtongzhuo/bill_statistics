@@ -17,7 +17,7 @@ async function main() {
     const price = parseFloat(order['价格'])
     orderDayList[day] = orderDayList[day] + price
     totalPrice += price
-    if (price > 100) {
+    if (price >= 100) {
       console.log(order['时间'], order['支付对象'], order['商品'], order['价格']);
     }
   }

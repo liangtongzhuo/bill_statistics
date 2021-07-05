@@ -3,9 +3,11 @@
  */
 
 const { readcsv, wechatBillSave, zfbtBillSave } = require('./util')
-const { dbSave, dbAddOrder } = require('./util/db')
+const { dbSave, dbAddOrder,clearDb } = require('./util/db')
 
 async function main() {
+  // 清空数据库
+  clearDb()
   // 微信
   const wechatBillList = await readcsv('./order/7month/in_wechat.csv')
   await wechatBillSave(wechatBillList)
@@ -13,9 +15,11 @@ async function main() {
   const zfbBillList = await readcsv('./order/7month/in_zfb.csv')
   await zfbtBillSave(zfbBillList)
   // 第三方
-  dbAddOrder('第三方', `2021/6/1 00:00`, `2021/6/15 00:00`, `美团`, '美团', '120', '不记得买什么了')
+  dbAddOrder('第三方', `2021/6/1 00:00`, `2021/6/15 00:00`, `美团`, '美团', '120', '')
+  dbAddOrder('第三方', `2021/6/10 00:00`, `2021/6/10 00:00`, `省直公积金`, '额外补充的省直公积金', '1400', '')
   dbAddOrder('第三方', `2021/6/15 00:00`, `2021/6/15 00:00`, `银行`, '房贷', '3000', '住房房贷')
-  dbAddOrder('第三方', `2021/6/16 00:00`, `2021/6/16 00:00`, `空调`, '空调', '2000', '不记得买什么了')
+  dbAddOrder('第三方', `2021/6/16 00:00`, `2021/6/16 00:00`, `空调`, '空调', '2000', '')
+  dbAddOrder('第三方', `2021/6/28 00:00`, `2021/6/28 00:00`, `天然气验收`, '验收费', '600', '')
 
   // 数据缓存到本地数据库
   dbSave();

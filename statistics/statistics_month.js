@@ -9,6 +9,7 @@ async function main() {
   for (let index = 0; index < 30; index++) {
     orderDayList[index] = 0
   }
+  console.log('---------------花销大于100的订单---------------');
   // 统计每个月当天花销
   for (const key in db) {
     const order = db[key]
@@ -16,9 +17,8 @@ async function main() {
     const price = parseFloat(order['价格'])
     orderDayList[day] = orderDayList[day] + price
     totalPrice += price
-
     if (price > 100) {
-      console.log('花销大于100的订单', order['时间'], order['支付对象'], order['商品'], order['价格']);
+      console.log(order['时间'], order['支付对象'], order['商品'], order['价格']);
     }
   }
   console.log('7月总花销', totalPrice);

@@ -40,3 +40,6 @@ module.exports.dbGet = () => {
   return db;
 }
 
+module.exports.clearDb = () => {
+  return db = {};
+}

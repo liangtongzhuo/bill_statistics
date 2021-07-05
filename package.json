@@ -4,7 +4,8 @@
   "description": "每个月根据微信和支付宝记录统计账单",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js ",
+    "statistics": "node statistics/statistics_month.js"
   },
   "author": "",
   "license": "ISC",

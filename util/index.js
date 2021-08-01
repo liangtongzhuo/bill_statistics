@@ -63,10 +63,10 @@ module.exports.zfbtBillSave = (zfbBillList) => {
 }
 
 
-module.exports.createHtml = (totalPrice, max100TotalPrice, orderDayList, treeArr, average) => {
-  let html = fs.readFileSync('./in_html/line-simple.html', 'utf8');
+module.exports.createHtml = (totalPrice, max100TotalPrice, orderDayList, treeArr, average, month) => {
+  let html = fs.readFileSync(`./in_html/line-simple.html`, 'utf8');
   // 总量
-  html = html.replace('梁同桌 7 月份总花费 10000¥', `梁同桌 7 月份总花费 ${totalPrice.toFixed(2)}¥`);
+  html = html.replace('梁同桌 00 月份总花费 10000¥', `梁同桌 ${month} 月份总花费 ${totalPrice.toFixed(2)}¥`);
   // 消费占比
   html = html.replace('96/100', `${(max100TotalPrice/totalPrice*100).toFixed(2)}%`);
   // 每天消费
@@ -77,6 +77,6 @@ module.exports.createHtml = (totalPrice, max100TotalPrice, orderDayList, treeArr
   html = html.replace('[1, 2, 3, 4, 5]', JSON.stringify(orderDayList));
   // 并行图
   html = html.replace(`[1, 2]`, JSON.stringify(treeArr));
-  fs.writeFileSync('./out_html/line-simple.html', html, 'utf8');
+  fs.writeFileSync(`./out_html/${month}month_line-simple.html`, html, 'utf8');
 }
 

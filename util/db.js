@@ -39,6 +39,4 @@ module.exports.dbGet = (name) => {
   return db;
 }
 
-module.exports.clearDb = () => {
-  return db = {};
-}
+

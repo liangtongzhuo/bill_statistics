@@ -5,13 +5,14 @@ const moment = require('moment')
 
 // 生成统计页面
 async function main() {
-  const db = dbGet('6')
+  const month = 6
+  const db = dbGet(month)
   // 统计月时间线
-  const { totalPrice, orderDayList, max100TotalPrice } = await statisticsMonthTimeLine(db)
+  const { totalPrice, orderDayList, max100TotalPrice } = await statisticsMonthTimeLine(db, month)
   // 统计月饼图
   const { treeArr, average } = await statisticsMonthBorderRadius(db)
   // 生成预览页面
-  createHtml(totalPrice, max100TotalPrice, orderDayList, treeArr, average)
+  createHtml(totalPrice, max100TotalPrice, orderDayList, treeArr, average, month)
 }
 
 async function statisticsMonthBorderRadius(db) {
@@ -55,11 +56,12 @@ async function statisticsMonthBorderRadius(db) {
  * 统计月的
  * @param {*} db 
  */
-async function statisticsMonthTimeLine(db) {
+async function statisticsMonthTimeLine(db, month) {
   const orderDayList = []
   let totalPrice = 0
   let max100TotalPrice = 0
-  for (let index = 0; index < 30; index++) {
+  const maxDay = getMonthDateDayCount(2021, month)
+  for (let index = 0; index < maxDay; index++) {
     orderDayList[index] = 0
   }
 
@@ -82,6 +84,12 @@ async function statisticsMonthTimeLine(db) {
   }
 }
 
+
+// 获取月份天数
+function getMonthDateDayCount(year, month){
+  var d = new Date(year, month, 0);
+  return d.getDate();
+}
 
 main();
 

@@ -6,7 +6,6 @@ const month = 7
 
 // 生成统计页面
 async function main() {
-
   const db = dbGet(month)
   // 统计月时间线
   const { totalPrice, orderDayList, max100TotalPrice } = await statisticsMonthTimeLine(db, month)
@@ -16,6 +15,10 @@ async function main() {
   createHtml(totalPrice, max100TotalPrice, orderDayList, treeArr, average, month)
 }
 
+/**
+ * 统计一个月每天的消费
+ * @param {*} db 
+ */
 async function statisticsMonthBorderRadius(db) {
   const tree = config.tree
   const treePrice = config.treePrice
@@ -89,7 +92,6 @@ async function statisticsMonthTimeLine(db, month) {
     totalPrice, orderDayList, max100TotalPrice
   }
 }
-
 
 // 获取月份天数
 function getMonthDateDayCount(year, month) {

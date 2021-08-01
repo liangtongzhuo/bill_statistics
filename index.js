@@ -12,9 +12,9 @@ async function main() {
   // 保存数据
   await wechatBillSave(wechatBillList)
   // 读取支付宝
-  // const zfbBillList = await readcsv(`./order/${month}month/in_zfb.csv`)
+  const zfbBillList = await readcsv(`./order/${month}month/in_zfb.csv`)
   // 保存数据
-  // await zfbtBillSave(zfbBillList)
+  await zfbtBillSave(zfbBillList)
   // 
   await funMonth(month)
 

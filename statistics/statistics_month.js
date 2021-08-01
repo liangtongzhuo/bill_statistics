@@ -2,10 +2,11 @@ const { dbGet } = require('../util/db')
 const { createHtml } = require('../util')
 const config = require('../config')
 const moment = require('moment')
+const month = 6
 
 // 生成统计页面
 async function main() {
-  const month = 6
+  
   const db = dbGet(month)
   // 统计月时间线
   const { totalPrice, orderDayList, max100TotalPrice } = await statisticsMonthTimeLine(db, month)

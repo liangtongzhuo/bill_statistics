@@ -2,8 +2,8 @@ node_modules
 package-lock.json
 order
 config
-out_html
+out_html/*
 dist
-db/
+db/*
 *.lock
 *.log

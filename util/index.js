@@ -61,3 +61,22 @@ module.exports.zfbtBillSave = (zfbBillList) => {
     }
   }
 }
+
+
+module.exports.createHtml = (totalPrice, max100TotalPrice, orderDayList, treeArr, average) => {
+  let html = fs.readFileSync('./in_html/line-simple.html', 'utf8');
+  // 总量
+  html = html.replace('梁同桌 7 月份总花费 10000¥', `梁同桌 7 月份总花费 ${totalPrice.toFixed(2)}¥`);
+  // 消费占比
+  html = html.replace('96/100', `${(max100TotalPrice/totalPrice*100).toFixed(2)}%`);
+  // 每天消费
+  html = html.replace('1212', `${(totalPrice/31).toFixed(2)}`);
+  // 除去贷款每天平均消费
+  html = html.replace('1213', `${(average/31).toFixed(2)}`);
+  // 曲线图数据
+  html = html.replace('[1, 2, 3, 4, 5]', JSON.stringify(orderDayList));
+  // 并行图
+  html = html.replace(`[1, 2]`, JSON.stringify(treeArr));
+  fs.writeFileSync('./out_html/line-simple.html', html, 'utf8');
+}
+

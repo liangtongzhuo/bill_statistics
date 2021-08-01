@@ -1,0 +1,134 @@
+<!--
+    THIS EXAMPLE WAS DOWNLOADED FROM https://echarts.apache.org/examples/zh/editor.html?c=line-simple
+-->
+<!DOCTYPE html>
+<html style="height: 100%">
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body style="height: 100%; margin: 0">
+    <h1 style="text-align: center;height: 50px;">梁同桌 7 月份总花费 10000¥</h1>
+    <div style="height: 45%;display: flex;margin: 0 80px;">
+        <div id="main" style="width:50%;height: 100%;"></div>
+        <div
+            style="width:50%;height: 100%;;display: flex;justify-content: center;align-items: center;flex-wrap: wrap; ">
+            <div>
+                <p>花费超过 100 的占总消费比：
+                    <span style="font-weight: 700;text-decoration: underline;color: rgb(0 ,112 ,255)">96/100</span>
+                </p>
+                <p>去除贷款平均每天花费：
+                    <span style="font-weight: 700;text-decoration: underline;color: rgb(0,112 ,255)">1213</span>
+                </p>
+                <p>平均每天花费：
+                    <span style="font-weight: 700;text-decoration: underline;color: rgb(0,112 ,255)">1212</span>
+                </p>
+            </div>
+
+        </div>
+    </div>
+    <div id="container" style="height: 45%;margin-top: -40px;"></div>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+    <script type="text/javascript">
+        var chartDom = document.getElementById('main');
+        var myChart = echarts.init(chartDom);
+        var option;
+
+        option = {
+            tooltip: {
+                trigger: 'item'
+            },
+            legend: {
+                left: 'center'
+            },
+            series: [
+                {
+                    type: 'pie',
+                    radius: '50%',
+                    data: [1, 2],
+
+                    itemStyle: {
+                        borderRadius: 10,
+                        borderColor: '#fff',
+                        borderWidth: 2
+                    },
+
+                    emphasis: {
+                        itemStyle: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+
+        option && myChart.setOption(option);
+
+    </script>
+    <script type="text/javascript">
+        const dom = document.getElementById("container");
+        const myChart2 = echarts.init(dom);
+        // 每天的数据
+        const orderDayList = [1, 2, 3, 4, 5]
+        // 天数
+        const dataArr = []
+        for (let index = 0; index < orderDayList.length; index++) {
+            dataArr.push(`6月${index + 1}`)
+        }
+        const option2 = {
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: dataArr
+            },
+            tooltip: {
+                trigger: 'axis',
+                // 返回的数据
+                formatter: function (params) {
+                    return `${params[0].axisValue}，${params[0].data}`
+                }
+            },
+            yAxis: {
+                type: 'value',
+                boundaryGap: false
+            },
+            series: [{
+                data: orderDayList,
+                type: 'line',
+                markLine: {
+                    data: [
+                        { type: 'average', name: '平均值' }
+                    ]
+                },
+                label: {
+                    show: true,
+                    position: 'top'
+                },
+                lineStyle: {
+                    width: 1
+                },
+                itemStyle: {
+                    color: 'rgba(255, 70, 131,0.9)'
+                },
+                areaStyle: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: 'rgba(255, 70, 131, 0.9)'
+                    }, {
+                        offset: 1,
+                        color: 'rgba(255, 70, 131,0.2)'
+                    }])
+                },
+            },
+            ]
+        };
+
+        myChart2.setOption(option2);
+
+    </script>
+</body>
+
+</html>

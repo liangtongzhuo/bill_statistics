@@ -2,5 +2,7 @@ node_modules
 package-lock.json
 order
 config
+out_html
+dist
 *.lock
 *.log

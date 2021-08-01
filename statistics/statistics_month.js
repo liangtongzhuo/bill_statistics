@@ -5,7 +5,7 @@ const moment = require('moment')
 
 // 生成统计页面
 async function main() {
-  const db = dbGet()
+  const db = dbGet('6')
   // 统计月时间线
   const { totalPrice, orderDayList, max100TotalPrice } = await statisticsMonthTimeLine(db)
   // 统计月饼图

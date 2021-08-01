@@ -5,6 +5,7 @@
 const { readcsv, wechatBillSave, zfbtBillSave } = require('./util')
 const { dbSave, dbAddOrder, clearDb } = require('./util/db')
 
+// 保存数据到db
 async function main() {
   // 清空数据库
   clearDb()

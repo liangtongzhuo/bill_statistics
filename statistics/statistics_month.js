@@ -13,6 +13,7 @@ async function main() {
   // 生成预览页面
   createHtml(totalPrice, max100TotalPrice, orderDayList, treeArr, average)
 }
+
 async function statisticsMonthBorderRadius(db) {
   const tree = config.tree
   const treePrice = config.treePrice

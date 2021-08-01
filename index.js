@@ -6,16 +6,15 @@ const { dbSave, dbAddOrder } = require('./util/db')
 
 // 保存数据到db
 async function main() {
-
-  const month = 6;
+  const month = 7;
   // 读取微信
   const wechatBillList = await readcsv(`./order/${month}month/in_wechat.csv`)
   // 保存数据
   await wechatBillSave(wechatBillList)
   // 读取支付宝
-  const zfbBillList = await readcsv(`./order/${month}month/in_zfb.csv`)
+  // const zfbBillList = await readcsv(`./order/${month}month/in_zfb.csv`)
   // 保存数据
-  await zfbtBillSave(zfbBillList)
+  // await zfbtBillSave(zfbBillList)
   // 
   await funMonth(month)
 
@@ -35,7 +34,12 @@ async function funMonth(month) {
     dbAddOrder('第三方', `2021/6/28 00:00`, `2021/6/28 00:00`, `天然气验收`, '验收费', '600', '')
   }else if (month === 7) {
     console.log(111);
-    
+    // 地铁
+    // 复印材料
+    // 学费
+    // 认证材料
+    // 卡片办理
+
   }
 }
 

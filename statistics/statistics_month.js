@@ -3,7 +3,7 @@ const { createHtml } = require('../util')
 const config = require('../config')
 const moment = require('moment')
 
-
+// 生成统计页面
 async function main() {
   const db = dbGet()
   // 统计月时间线
@@ -76,7 +76,7 @@ async function statisticsMonthTimeLine(db) {
       max100TotalPrice += parseFloat(order['价格'])
     }
   }
-  console.log('-------------------------------------------------------------');
+  console.log('----完成统计----');
   return {
     totalPrice, orderDayList, max100TotalPrice
   }

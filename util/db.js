@@ -1,10 +1,6 @@
 const fs = require('fs')
-const dbPath = "./db.txt"
+let dbPath = "./db/db"
 let db = {}
-
-try {
-  db = JSON.parse(fs.readFileSync(dbPath, "utf8"));
-} catch (error) { }
 
 /**
  * 
@@ -28,15 +24,18 @@ module.exports.dbAddOrder = (支付宝或微信, 交易单号, 时间, 支付对
 /**
  * 保存数据到本地
  */
-module.exports.dbSave = () => {
-  fs.writeFileSync(dbPath, JSON.stringify(db));
+module.exports.dbSave = (name) => {
+  fs.writeFileSync(`${dbPath}_${name}`, JSON.stringify(db));
 }
 
 
 /**
  * 获取数据
  */
-module.exports.dbGet = () => {
+module.exports.dbGet = (name) => {
+  try {
+    db = JSON.parse(fs.readFileSync(`${dbPath}_${name}`, "utf8"));
+  } catch (error) { }
   return db;
 }
 

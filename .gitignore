@@ -4,5 +4,6 @@ order
 config
 out_html
 dist
+db/
 *.lock
 *.log

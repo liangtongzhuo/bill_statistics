@@ -6,7 +6,7 @@ const month = 7
 
 // 生成统计页面
 async function main() {
-  
+
   const db = dbGet(month)
   // 统计月时间线
   const { totalPrice, orderDayList, max100TotalPrice } = await statisticsMonthTimeLine(db, month)
@@ -43,13 +43,12 @@ async function statisticsMonthBorderRadius(db) {
         value: treePrice[key].toFixed(2), name: `${key}: ${treePrice[key].toFixed(2)}`,
       })
       if (key != '贷款和利息') {
-        console.log(average, treePrice[key]);
         average += treePrice[key]
       }
     }
   }
   return {
-    treeArr,average
+    treeArr, average
   }
 }
 
@@ -79,6 +78,12 @@ async function statisticsMonthTimeLine(db, month) {
     }
     console.log(order['时间'], order['支付对象'], order['商品'], order['价格']);
   }
+
+  // 四舍五入
+  for (const day in orderDayList) {
+    orderDayList[day] = Math.floor(orderDayList[day] * 100) / 100;
+  }
+
   console.log('----完成统计----');
   return {
     totalPrice, orderDayList, max100TotalPrice
@@ -87,7 +92,7 @@ async function statisticsMonthTimeLine(db, month) {
 
 
 // 获取月份天数
-function getMonthDateDayCount(year, month){
+function getMonthDateDayCount(year, month) {
   var d = new Date(year, month, 0);
   return d.getDate();
 }

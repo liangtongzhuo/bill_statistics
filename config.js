@@ -1,5 +1,6 @@
 // 默认配置
 module.exports = {
+    month: 7,
     tree : {
         '吃喝玩乐': [],
         '住': ['中宏酒店'],

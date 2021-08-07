@@ -3,10 +3,11 @@
  */
 const { readcsv, wechatBillSave, zfbtBillSave } = require('./util')
 const { dbSave, dbAddOrder } = require('./util/db')
+const config = require('./config')
+const month = config.month
 
 // 保存数据到db
 async function main() {
-  const month = 7;
   // 读取微信
   const wechatBillList = await readcsv(`./order/${month}month/in_wechat.csv`)
   // 保存数据

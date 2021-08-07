@@ -1,8 +1,8 @@
 const { dbGet } = require('../util/db')
 const { createHtml } = require('../util')
-const config = require('../config')
 const moment = require('moment')
-const month = 7
+const config = require('../config')
+const month = config.month
 
 // 生成统计页面
 async function main() {
@@ -80,6 +80,14 @@ async function statisticsMonthTimeLine(db, month) {
       max100TotalPrice += parseFloat(order['价格'])
     }
     console.log(order['时间'], order['支付对象'], order['商品'], order['价格']);
+  }
+
+  for (const key in db) {
+    const order = db[key]
+    const price = parseFloat(order['价格'])
+    if (price >= 100) {
+      console.log('大于10的账单：',order['时间'], order['支付对象'], order['商品'], order['价格']);
+    }
   }
 
   // 四舍五入

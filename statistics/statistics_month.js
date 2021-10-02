@@ -85,8 +85,8 @@ async function statisticsMonthTimeLine(db, month) {
   for (const key in db) {
     const order = db[key]
     const price = parseFloat(order['价格'])
-    if (price >= 100) {
-      console.log('大于10的账单：',order['时间'], order['支付对象'], order['商品'], order['价格']);
+    if (price >= 20) {
+      console.log('大于20的账单：',order['时间'], order['支付对象'], order['商品'], order['价格']);
     }
   }
 
@@ -107,6 +107,5 @@ function getMonthDateDayCount(year, month) {
   return d.getDate();
 }
 
-main();
 
-
+module.exports.createPage = main;

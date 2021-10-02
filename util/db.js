@@ -1,3 +1,4 @@
+const { throws } = require('assert')
 const fs = require('fs')
 let dbPath = "./db/db"
 let db = {}
@@ -15,6 +16,7 @@ let db = {}
 module.exports.dbAddOrder = (支付宝或微信, 交易单号, 时间, 支付对象, 商品, 价格, 备注) => {
   if (db[交易单号]) {
     console.log('已经存在了', db[交易单号].商品, db[交易单号].价格)
+    throw new Error('已经存在了, 交易单号')
   }
   db[交易单号] = {
     支付宝或微信, 交易单号, 时间, 支付对象, 商品, 价格, 备注

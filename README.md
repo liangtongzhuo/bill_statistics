@@ -71,3 +71,10 @@ https://github.com/liangtongzhuo/bill_statistics
 - util：工具
 - index：执行入口
 - config：配置文件，统计分类
+
+
+```
+npm i
+node index #生成数据
+node ./statistics/statistics_month.js #生成Web页面
+```
